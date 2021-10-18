@@ -3,7 +3,11 @@ from database.database import Database
 
 
 class BrandModel(Model):
-    def getBrandIds(self, brand: str):
-        listBrandId = Database()
-        listBrandId = Database.getBrandId(listBrandId, brand)
+    def __init__(self, brandName: str):
+        addNewBrand = Database()
+        addNewBrand.addBrand(brandName)
+
+    @classmethod
+    def getBrandIds(cls, brand: str):
+        listBrandId = Database.getBrandId('adidas')
         return listBrandId
