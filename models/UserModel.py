@@ -10,3 +10,10 @@ class UserModel(Model):
     def changeGender(cls, id: int, newGender: int):
         Database.changeParam(id, 'users', 'gender', newGender)
 
+    @classmethod
+    def checkUser(cls,id: int):
+        if(Database.checkRegistration(id)):
+            return True
+        else:
+            return False
+

@@ -142,3 +142,14 @@ class Database(metaclass=SingletonMeta):
                 cursor.execute(addItemRequest)
         finally:
             connection.close()
+    @classmethod
+    def checkRegistration(cls,id:int):
+        connection = Database.connectDb()
+        try:
+            with connection.cursor() as cursor:
+                checkQuery= f"SELECT users.user_id FROM `users` where telegram_tag={id}"
+                cursor.execute(checkQuery)
+                info = cursor.fetchall()
+        finally:
+            connection.close()
+            return info
