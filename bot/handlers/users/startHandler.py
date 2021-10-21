@@ -1,6 +1,6 @@
 from aiogram.types import Message, CallbackQuery
 from ...keyboards.inline import genderSelect
-from ...keyboards.reply.buttonsReply import mainMenuButtons
+from ...keyboards.reply.mainMenu import mainMenuButtons
 from ...loader import dp, bot
 from database.database import Database
 
@@ -21,4 +21,4 @@ async def selectGender(call: CallbackQuery):
         Database.createUser(call.from_user.id, 1)
     else:
         Database.createUser(call.from_user.id, 0)
-    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Спасибо за регестарцию!", reply_markup=None)
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Спасибо за регестарцию!", reply_markup=mainMenuButtons)
