@@ -6,5 +6,4 @@ from controllers.RequestController import RequestsControlelr
 @dp.message_handler(text_contains="Поиск", state='*')
 async def searchHandler(message: Message, state: FSMContext):
     data = await state.get_data()
-    if (RequestsControlelr.checkArrayParams(dict(data))):
-        pass
+    await RequestsControlelr.checkArrayParams(dict(data))

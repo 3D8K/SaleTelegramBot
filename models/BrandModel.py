@@ -14,7 +14,7 @@ class BrandModel(Model):
     @classmethod
     def getBrandid(cls, brand: str):
         brandId = Database.checkLine(cls.tableName, cls.column, brand)
-        return brandId
+        return brandId[0]['brand_id']
 
     @classmethod
     def getBrandIds(cls, brand: str):

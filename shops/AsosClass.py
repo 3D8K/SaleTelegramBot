@@ -6,7 +6,8 @@ from SneakerClass import Sneaker
 
 
 class Asos(Shop):
-    def loadList(self, gender: int, brand: int, color: str, priceLow: int, priceHigh: int, size: str):
+    @classmethod
+    def loadList(cls, gender, brand, color, priceLow, priceHigh, size):
         if (gender):
             url = 'https://www.asos.com/api/product/search/v2/categories/4209?'
         else:
@@ -24,14 +25,14 @@ class Asos(Shop):
             response = req.json()
         except:
             return []
-        self.jsonPars(response)
+        cls.jsonPars(response)
 
-
-    def jsonPars(self, jsonList: dict):
+    @classmethod
+    def jsonPars(cls, jsonList: dict):
         productList = []
         for product in jsonList['products']:
             name = product['name']
             productList.append(Sneaker(name[name.find(product['brandName']):], product['price']['current']['text'],
-                                                    ('https://www.asos.com/ru/' + product['url']),
-                                                    'https://' + product['imageUrl']))
+                                       ('https://www.asos.com/ru/' + product['url']),
+                                       'https://' + product['imageUrl']))
         return productList

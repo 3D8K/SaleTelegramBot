@@ -53,7 +53,10 @@ class Database(metaclass=SingletonMeta):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                Query = f"SELECT * FROM `{tableName}` WHERE {columnName}={value}"
+                if (value==str):
+                    Query = f"SELECT * FROM `{tableName}` WHERE {columnName}='{value}'"
+                else:
+                    Query = f"SELECT * FROM `{tableName}` WHERE {columnName}='{value}'"
                 cursor.execute(Query)
                 result = cursor.fetchall()
         finally:
