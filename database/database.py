@@ -26,116 +26,11 @@ class Database(metaclass=SingletonMeta):
         return connection
 
     @classmethod
-    def getBrandId(cls, brand: str):
+    def add(cls, tableName, columns, values):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                getBrandIdQuery = f"SELECT shops_has_brands.brand_req_id, shops.`name` FROM shops_has_brands INNER JOIN shops ON shops_has_brands.shop_id = shops.shop_id " \
-                                  f"INNER JOIN brands ON shops_has_brands.brand_id = brands.brand_id WHERE brands.`name` = '{brand}'"
-                cursor.execute(getBrandIdQuery)
-                brandIDList = cursor.fetchall()
-        finally:
-            connection.close()
-            return brandIDList
-
-    @classmethod
-    def loggReq(cls, id: int, brand: str, color: str, size: str, priceLow: int, priceHigh: int):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                getUserBrandInfo = f"SELECT users.user_id, brands.brand_id FROM users, brands WHERE users.telegram_tag = {id} AND brands.`name` = '{brand}'"
-                cursor.execute(getUserBrandInfo)
-                params = cursor.fetchall()
-                loggReq = f"INSERT INTO `requests` (user_id, brand_id, color, size, price_low, price_high) values ({'user_id'[params]}, {'brand_id'[params]}, '{color}', '{size}', {priceLow}, {priceHigh})"
-                cursor.execute(loggReq)
-                connection.commit()
-        finally:
-            connection.close()
-
-    @classmethod
-    def getWaitList(cls, brand: str, name: str, color: str, size: str):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                WaitListQuery = f""
-                cursor.execute(WaitListQuery)
-                connection.commit()
-        finally:
-            connection.close()
-
-    @classmethod
-    def addBrand(cls, brandName: str):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                addNewBrand = f"INSERT INTO `brands` (name) VALUE ({brandName})"
-                cursor.execute(addNewBrand)
-                connection.commit()
-        finally:
-            connection.close()
-
-    @classmethod
-    def addRequestLog(cls, id: int, brand: str, size: str, color: str, priceLow: int, priceHigh: int):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                getUserBrandInfo = f"SELECT users.user_id, brands.brand_id FROM users, brands WHERE users.telegram_tag = {id} AND brands.`name` = '{brand}'"
-                cursor.execute(getUserBrandInfo)
-                params = cursor.fetchall()
-                requestInfo = f"INSERT INTO `requests` (user_id, brand_id, size, color, price_low, price_high) VALUES ({params['user_id']}, {params['brand_id']}, {size},{color},{priceLow},{priceHigh})"
-                cursor.execute(requestInfo)
-                connection.commit()
-        finally:
-            connection.close()
-
-    @classmethod
-    def getRequestLog(cls, id: int):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                getUserBrandInfo = f"SELECT users.user_id FROM users WHERE users.telegram_tag = {id}"
-                cursor.execute(getUserBrandInfo)
-                userId = cursor.fetchall()
-                getUserBrandInfo = f"SELECT * FROM `requests` WHERE user_id = {userId['user_id']}"
-                cursor.execute(getUserBrandInfo)
-                info = cursor.fetchall()
-        finally:
-            connection.close()
-            return info
-
-    @classmethod
-    def changeParam(cls, id: int, tableName: str, collum: str, newValue):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                if (newValue is str):
-                    changeValue = f"UPDATE `{tableName}` SET {collum} = '{newValue}' WHERE id={id}"
-                else:
-                    changeValue = f"UPDATE `{tableName}` SET {collum} = {newValue} WHERE id={id}"
-                cursor.execute(changeValue)
-                connection.commit()
-        finally:
-            connection.close()
-
-    @classmethod
-    def addItem(cls, brand: str, modelName: str, color: str, size: str):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                getBrandId = f"SELECT brands.brand_id FROM brands WHERE brands.name = '{brand}'"
-                cursor.execute(getBrandId)
-                brandId = cursor.fetchall()
-                addItemRequest = f"INSERT INTO `items` (brand_id, name, color, size) VALUES ({brandId}, '{modelName}',{color}, {size})"
-                cursor.execute(addItemRequest)
-        finally:
-            connection.close()
-
-    @classmethod
-    def add(cls, tableName: str, params, values):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in params)) + ") VALUES(" + ','.join(
+                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in columns)) + ") VALUES(" + ','.join(
                     (str(n) for n in values)) + ")"
                 cursor.execute(Query)
                 connection.commit()
@@ -143,24 +38,35 @@ class Database(metaclass=SingletonMeta):
             connection.close()
 
     @classmethod
-    def change(cls, tableName: str, column, newValue, idColumnName: str, id):
+    def change(cls, tableName: str, column, newValue, ColumnName, value):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                Query = f"UPDATE `{tableName}` SET {column} = {newValue} WHERE {idColumnName}={id}"
+                Query = f"UPDATE `{tableName}` SET {column} = {newValue} WHERE {ColumnName}={value}"
                 cursor.execute(Query)
                 connection.commit()
         finally:
             connection.close()
 
     @classmethod
-    def checkLine(cls, tableName, idColumnName, id):
+    def checkLine(cls, tableName, columnName, value):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                Query = f"SELECT * FROM `{tableName}` WHERE {idColumnName}={id}"
+                Query = f"SELECT * FROM `{tableName}` WHERE {columnName}={value}"
                 cursor.execute(Query)
                 result = cursor.fetchall()
         finally:
             connection.close()
             return result
+
+    @classmethod
+    def delete(cls, tableName, columnName, value):
+        connection = Database.connectDb()
+        try:
+            with connection.cursor() as cursor:
+                Query = f"DELETE * FROM `{tableName}` WHERE {columnName}={value}"
+                cursor.execute(Query)
+                result = cursor.fetchall()
+        finally:
+            connection.close()

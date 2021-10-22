@@ -3,9 +3,8 @@ from aiogram.types import Message
 from ...loader import dp
 from controllers.RequestController import RequestsControlelr
 
-
-
 @dp.message_handler(text_contains="Поиск", state='*')
-async def printState(message: Message, state: FSMContext):
+async def searchHandler(message: Message, state: FSMContext):
     data = await state.get_data()
-    RequestsControlelr.checkFullParams(dict(data))
+    if (RequestsControlelr.checkArrayParams(dict(data))):
+        pass
