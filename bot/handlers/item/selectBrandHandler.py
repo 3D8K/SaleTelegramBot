@@ -18,7 +18,4 @@ async def brandSelect(call: CallbackQuery, state: FSMContext):
     await state.reset_state(with_data=False)
     await bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f"Вы выбрали бренд {brand}", reply_markup=None)
 
-@dp.message_handler(text_contains="Поиск", state='*')
-async def printState(message : Message, state: FSMContext):
-    data = await state.get_data()
-    print(data)
+

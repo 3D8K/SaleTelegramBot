@@ -5,6 +5,7 @@ from shops.FarfetchClass import Farfetch
 from models.BrandModel import BrandModel
 from models.RequestModel import RequestModel
 
+
 class RequestsControlelr(object):
     @classmethod
     async def checkShops(cls, id: int, params: dict):
@@ -12,4 +13,9 @@ class RequestsControlelr(object):
         pass
 
     @classmethod
-    def checkFullParams(cls):
+    def checkFullParams(cls, data: dict):
+        emptyParams = []
+        for param in data:
+            if not data.get(param):
+                emptyParams.append(param)
+        return emptyParams

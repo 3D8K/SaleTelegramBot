@@ -26,19 +26,6 @@ class Database(metaclass=SingletonMeta):
         return connection
 
     @classmethod
-    def createUser(cls, user_id: int, gender: int):
-        connection = Database.connectDb()
-        try:
-            with connection.cursor() as cursor:
-                addUserQuery = f"INSERT INTO `users` (telegram_tag, gender) VALUES ({user_id}, {gender})"
-                cursor.execute(addUserQuery)
-                connection.commit()
-        except:
-            print('Дубликат')
-        finally:
-            connection.close()
-
-    @classmethod
     def getBrandId(cls, brand: str):
         connection = Database.connectDb()
         try:
@@ -142,14 +129,38 @@ class Database(metaclass=SingletonMeta):
                 cursor.execute(addItemRequest)
         finally:
             connection.close()
+
     @classmethod
-    def checkRegistration(cls,id:int):
+    def add(cls, tableName: str, params, values):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                checkQuery= f"SELECT users.user_id FROM `users` where telegram_tag={id}"
-                cursor.execute(checkQuery)
-                info = cursor.fetchall()
+                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in params)) + ") VALUES(" + ','.join(
+                    (str(n) for n in values)) + ")"
+                cursor.execute(Query)
+                connection.commit()
         finally:
             connection.close()
-            return info
+
+    @classmethod
+    def change(cls, tableName: str, column, newValue, idColumnName: str, id):
+        connection = Database.connectDb()
+        try:
+            with connection.cursor() as cursor:
+                Query = f"UPDATE `{tableName}` SET {column} = {newValue} WHERE {idColumnName}={id}"
+                cursor.execute(Query)
+                connection.commit()
+        finally:
+            connection.close()
+
+    @classmethod
+    def checkLine(cls, tableName, idColumnName, id):
+        connection = Database.connectDb()
+        try:
+            with connection.cursor() as cursor:
+                Query = f"SELECT * FROM `{tableName}` WHERE {idColumnName}={id}"
+                cursor.execute(Query)
+                result = cursor.fetchall()
+        finally:
+            connection.close()
+            return result
