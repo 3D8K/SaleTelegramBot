@@ -26,7 +26,6 @@ class Asos(Shop):
         uaTemp = UserAgent()
         randomUserAgent = uaTemp.random
         req = requests.get(url=url, params=requestParams)
-        print('d')
         try:
             response = req.json()
         except:

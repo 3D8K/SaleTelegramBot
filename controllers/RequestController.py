@@ -8,14 +8,18 @@ from models.RequestModel import RequestModel
 class RequestsControlelr(object):
     @classmethod
     def checkShops(cls, brandIds: dict, params: dict):
-
-        result = Asos.loadList(params['gender'], brandIds[0]['brand_req_id'], params['color'], params['priceLow'],
-                                     params['priceHigh'], params['size'])
+        resultAsos = Asos.loadList(params['gender'], brandIds[0]['brand_req_id'], params['color'],
+                                   params['priceLow'],
+                                   params['priceHigh'], params['size']),
+        resultFarfetch = Farfetch.loadList(params['gender'], brandIds[1]['brand_req_id'], params['color'],
+                                           params['priceLow'],
+                                           params['priceHigh'], params['size'])
+        result = resultAsos[0] + resultFarfetch
         return result
 
     @classmethod
     async def checkArrayParams(cls, data: dict):
-        emptyKeys = []
+        emptyKeys = ['err']
         if data.setdefault('priceLow') == None:
             data['priceLow'] = 0
         if data.setdefault('priceHigh') == None:
@@ -24,12 +28,12 @@ class RequestsControlelr(object):
             data['color'] = 'any'
         if len(data) < 6:
             if 'gender' not in data:
-                emptyKeys.append('gender')
+                emptyKeys.append('пол')
             if 'brand' not in data:
-                emptyKeys.append('brand')
+                emptyKeys.append('бренд')
             if 'size' not in data:
-                emptyKeys.append('size')
-
+                emptyKeys.append('размер')
+            return emptyKeys
 
         else:
             brandsId = BrandModel.getBrandIds(data['brand'])
