@@ -1,5 +1,5 @@
 from bot.keyboards.inline.callbacks import callbackDatas
-from emoji import *
+from gui.emoji import *
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 genderButtons = InlineKeyboardMarkup(row_width=2)
 

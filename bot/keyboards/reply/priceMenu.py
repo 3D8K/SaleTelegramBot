@@ -1,4 +1,4 @@
-from emoji import *
+from gui.emoji import *
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 priceButtons = ReplyKeyboardMarkup(resize_keyboard=True)

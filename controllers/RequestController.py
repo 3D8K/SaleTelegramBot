@@ -7,17 +7,11 @@ from models.RequestModel import RequestModel
 
 class RequestsControlelr(object):
     @classmethod
-    async def checkShops(cls, brandIds: dict, params: dict):
-        gender = params['gender']
-        brand_id = brandIds[0]['brand_req_id']
-        color = params['color']
-        priceLow = params['priceLow']
-        priceHigh = params['priceHigh']
-        size = params['size']
+    def checkShops(cls, brandIds: dict, params: dict):
 
-        await Asos.loadList(params['gender'], brand_id, params['color'], params['priceLow'],
-                            params['priceHigh'], params['size'])
-        pass
+        result = Asos.loadList(params['gender'], brandIds[0]['brand_req_id'], params['color'], params['priceLow'],
+                                     params['priceHigh'], params['size'])
+        return result
 
     @classmethod
     async def checkArrayParams(cls, data: dict):
@@ -39,4 +33,4 @@ class RequestsControlelr(object):
 
         else:
             brandsId = BrandModel.getBrandIds(data['brand'])
-            await cls.checkShops(brandsId, data)
+            return cls.checkShops(brandsId, data)
