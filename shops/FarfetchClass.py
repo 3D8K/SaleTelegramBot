@@ -24,7 +24,6 @@ class Farfetch(Shop):
             responese = req.json()
         except:
             sneakerList = []
-            print("429")
             return sneakerList
         sneakerList = responese['listingItems']['items']
         return cls.jsonPars(sneakerList)

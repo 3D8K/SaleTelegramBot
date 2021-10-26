@@ -26,7 +26,7 @@ async def setPriceHigh(message: Message):
 @dp.message_handler(state=SearchParams.PRICE_HIGH)
 async def getPriceHigh(message: Message, state: FSMContext):
     priceHigh = message.text
-    await state.update_data(priceLow=priceHigh)
+    await state.update_data(priceHigh=priceHigh)
     await state.reset_state(with_data=False)
 
 
@@ -39,5 +39,5 @@ async def setPriceLow(message: Message):
 @dp.message_handler(state=SearchParams.PRICE_LOW)
 async def getPriceLow(message: Message, state: FSMContext):
     priceLow = message.text
-    await state.update_data(priceHigh=priceLow)
+    await state.update_data(priceLow=priceLow)
     await state.reset_state(with_data=False)

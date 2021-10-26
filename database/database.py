@@ -30,8 +30,7 @@ class Database(metaclass=SingletonMeta):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in columns)) + ") VALUES(" + ','.join(
-                    (str(n) for n in values)) + ")"
+                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in columns)) + ") VALUES(" + ','.join((str(f"'{n}'") for n in values)) + ")"
                 cursor.execute(Query)
                 connection.commit()
         finally:
@@ -53,7 +52,7 @@ class Database(metaclass=SingletonMeta):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                if (value==str):
+                if (value == str):
                     Query = f"SELECT * FROM `{tableName}` WHERE {columnName}='{value}'"
                 else:
                     Query = f"SELECT * FROM `{tableName}` WHERE {columnName}='{value}'"

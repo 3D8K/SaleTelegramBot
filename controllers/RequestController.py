@@ -1,3 +1,8 @@
+from aiogram.types import ParseMode
+from bot.loader import bot
+from aiogram.utils.markdown import bold
+
+from gui import emoji
 from shops.AsosClass import Asos
 from shops.LystClass import Lyst
 from shops.FarfetchClass import Farfetch
@@ -7,18 +12,21 @@ from models.RequestModel import RequestModel
 
 class RequestsControlelr(object):
     @classmethod
-    def checkShops(cls, brandIds: dict, params: dict):
+    def checkShops(cls, brandIds: dict, brandName: str, params: dict):
         resultAsos = Asos.loadList(params['gender'], brandIds[0]['brand_req_id'], params['color'],
                                    params['priceLow'],
                                    params['priceHigh'], params['size']),
         resultFarfetch = Farfetch.loadList(params['gender'], brandIds[1]['brand_req_id'], params['color'],
                                            params['priceLow'],
                                            params['priceHigh'], params['size'])
-        result = resultAsos[0] + resultFarfetch
+        resultLyst = Lyst.loadList(params['gender'], brandName, params['color'],
+                                   params['priceLow'],
+                                   params['priceHigh'], params['size'])
+        result = resultAsos[0] + resultFarfetch + resultLyst
         return result
 
     @classmethod
-    async def checkArrayParams(cls, data: dict):
+    async def checkArrayParams(cls, data: dict, telegaramTag: int):
         emptyKeys = ['err']
         if data.setdefault('priceLow') == None:
             data['priceLow'] = 0
@@ -36,5 +44,9 @@ class RequestsControlelr(object):
             return emptyKeys
 
         else:
+            await bot.send_message(chat_id=telegaramTag,
+                                   text=bold(f"Выполняю поиск {emoji.WAIT_EMOJI}"),
+                                   parse_mode=ParseMode.MARKDOWN)
+            RequestModel(telegaramTag, data['brand'], data['size'], data['color'], data['priceLow'], data['priceHigh'])
             brandsId = BrandModel.getBrandIds(data['brand'])
-            return cls.checkShops(brandsId, data)
+            return cls.checkShops(brandIds=brandsId, params=data, brandName=data['brand'])

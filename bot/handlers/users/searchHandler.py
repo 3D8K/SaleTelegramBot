@@ -10,11 +10,11 @@ from controllers.RequestController import RequestsControlelr
 @dp.message_handler(text_contains="Поиск", state='*')
 async def searchHandler(message: Message, state: FSMContext):
     data = await state.get_data()
-    items = await RequestsControlelr.checkArrayParams(dict(data))
+    items = await RequestsControlelr.checkArrayParams(dict(data), message.chat.id)
     if (items[0] == 'err'):
         items.pop(0)
         await message.answer(
-            text=bold(f"Вы не заполнили обязательные поля:{','.join((str(n) for n in items))}{emoji.WARNING_EMOJI}"),
+            text=bold(f"Вы не заполнили обязательные поля: {','.join((str(n) for n in items))}{emoji.WARNING_EMOJI}"),
             parse_mode=ParseMode.MARKDOWN)
     else:
         if (items == None):
