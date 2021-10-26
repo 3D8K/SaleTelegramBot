@@ -1,9 +1,9 @@
-from shops.ShopClass import Shop
+from models.core.ShopClass import Shop
 from gui.colors import asosColors
 from fake_useragent import UserAgent
 import requests
 from gui.asosGui.AsosArrayParams import *
-from SneakerClass import Sneaker
+from models.core.SneakerClass import Sneaker
 
 
 class Asos(Shop):

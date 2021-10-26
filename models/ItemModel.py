@@ -1,6 +1,5 @@
-from models.Model import Model
+from models.core.Model import Model
 from database.database import Database
-from models.BrandModel import BrandModel
 
 
 class ItemModel(Model):

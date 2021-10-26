@@ -1,5 +1,5 @@
-from SneakerClass import Sneaker
-from shops.ShopClass import Shop
+from models.core.SneakerClass import Sneaker
+from models.core.ShopClass import Shop
 import requests
 
 

@@ -1,4 +1,4 @@
-from models.Model import Model
+from models.core.Model import Model
 from abc import  abstractmethod
 
 

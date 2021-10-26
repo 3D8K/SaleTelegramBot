@@ -1,4 +1,4 @@
-from models.Model import Model
+from models.core.Model import Model
 from models.BrandModel import BrandModel
 from models.UserModel import UserModel
 from database.database import Database

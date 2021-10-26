@@ -1,6 +1,6 @@
-from shops.ShopClass import Shop
+from models.core.ShopClass import Shop
 from fake_useragent import UserAgent
-from SneakerClass import Sneaker
+from models.core.SneakerClass import Sneaker
 from gui.fatfetchGui.FarfetchArrayParams import *
 import requests
 
