@@ -21,3 +21,8 @@ class BrandModel(Model):
         brandId = cls.getBrandid(brand)
         listBrandId = Database.checkLine(cls.coherentTableName, cls.coherentColumn, brandId)
         return listBrandId
+
+    @classmethod
+    def getBrandName(cls,brandId:str):
+        brandName = Database.checkLine(cls.tableName,cls.coherentColumn, brandId)
+        return brandName[0]['name']
