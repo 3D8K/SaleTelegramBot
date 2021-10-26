@@ -23,8 +23,12 @@ class Farfetch(Shop):
         try:
             responese = req.json()
         except:
-            sneakerList = []
-            return sneakerList
+            randomUserAgent = uaTemp.random
+            req = requests.get(url=url, params=requestParams, headers={"User-Agent": randomUserAgent})
+            try:
+                responese = req.json()
+            except:
+                return []
         sneakerList = responese['listingItems']['items']
         return cls.jsonPars(sneakerList)
 
