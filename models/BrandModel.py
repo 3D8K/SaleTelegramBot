@@ -1,5 +1,5 @@
-from models.core.Model import Model
 from database.database import Database
+from models.core.Model import Model
 
 
 class BrandModel(Model):

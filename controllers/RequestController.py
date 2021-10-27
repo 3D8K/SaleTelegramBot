@@ -1,12 +1,14 @@
 from aiogram.types import ParseMode
-from bot.loader import bot
 from aiogram.utils.markdown import bold
+
+from bot.loader import bot
 from gui import emoji
-from shops.AsosClass import Asos
-from shops.LystClass import Lyst
-from shops.FarfetchClass import Farfetch
 from models.BrandModel import BrandModel
 from models.RequestModel import RequestModel
+from shops.AsosClass import Asos
+from shops.FarfetchClass import Farfetch
+from shops.LystClass import Lyst
+
 LEN_ARRAY_PARAMS = 6
 MAX_PRICE_DEFAULT = 100000
 MIN_PRICE_DEFAULT = 0

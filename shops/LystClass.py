@@ -1,6 +1,7 @@
-from models.core.SneakerClass import Sneaker
-from models.core.ShopClass import Shop
 import requests
+
+from models.core.ShopClass import Shop
+from models.core.SneakerClass import Sneaker
 
 
 class Lyst(Shop):

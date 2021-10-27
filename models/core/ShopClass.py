@@ -1,5 +1,6 @@
+from abc import abstractmethod
+
 from models.core.Model import Model
-from abc import  abstractmethod
 
 
 class Shop(Model):

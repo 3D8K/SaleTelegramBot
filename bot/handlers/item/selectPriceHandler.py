@@ -1,11 +1,12 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ParseMode
 from aiogram.utils.markdown import bold, code
-from ...loader import dp, bot
-from ...keyboards.reply.priceMenu import priceButtons
-from ...keyboards.reply.mainMenu import mainMenuButtons
-from ...states.SearchParamsClass import SearchParams
+
 from gui.emoji import *
+from ...keyboards.reply.mainMenu import mainMenuButtons
+from ...keyboards.reply.priceMenu import priceButtons
+from ...loader import dp, bot
+from ...states.SearchParamsClass import SearchParams
 
 
 @dp.message_handler(text_contains="Цена")

@@ -1,9 +1,9 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, CallbackQuery, ParseMode
-from ...loader import dp, bot
 from aiogram.utils.markdown import bold, code
 
 from ...keyboards.inline.sizeSelect import sizeButtons
+from ...loader import dp, bot
 from ...states.SearchParamsClass import SearchParams
 
 

@@ -1,5 +1,6 @@
 import pymysql
-from database.configDB import *
+
+from configDB import *
 
 
 class SingletonMeta(type):

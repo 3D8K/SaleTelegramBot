@@ -1,5 +1,6 @@
-from aiogram.types import Message, CallbackQuery, ParseMode
+from aiogram.types import Message, CallbackQuery
 from aiogram.utils.markdown import bold
+
 from models.UserModel import UserModel
 from ...keyboards.inline import genderSelect
 from ...keyboards.reply.mainMenu import mainMenuButtons

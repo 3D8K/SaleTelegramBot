@@ -1,9 +1,10 @@
 from aiogram.dispatcher import FSMContext
-from aiogram.utils.markdown import  bold,  code
 from aiogram.types import Message, CallbackQuery, ParseMode
-from ...loader import dp, bot
+from aiogram.utils.markdown import bold, code
+
 from gui.emoji import *
 from ...keyboards.inline.colorSelect import colorsButton
+from ...loader import dp, bot
 from ...states.SearchParamsClass import SearchParams
 
 

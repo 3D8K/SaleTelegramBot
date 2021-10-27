@@ -1,6 +1,7 @@
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 from bot.keyboards.inline.callbacks import callbackDatas
 from gui.emoji import *
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 colorsButton = InlineKeyboardMarkup()
 white = InlineKeyboardButton(text=f'{WHITE_EMOJI}', callback_data= callbackDatas.colorCallBack.new(color='white'))

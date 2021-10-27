@@ -1,11 +1,12 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ParseMode
-from ...loader import dp, bot
 from aiogram.utils.markdown import bold
+
+from controllers.RequestController import RequestsControlelr
 from gui import emoji
 from models.BrandModel import BrandModel
 from models.RequestModel import RequestModel
-from controllers.RequestController import RequestsControlelr
+from ...loader import dp, bot
 
 
 @dp.message_handler(text_contains="Поиск", state='*')

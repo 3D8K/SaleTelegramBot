@@ -1,7 +1,7 @@
-from models.core.Model import Model
+from database.database import Database
 from models.BrandModel import BrandModel
 from models.UserModel import UserModel
-from database.database import Database
+from models.core.Model import Model
 
 
 class RequestModel(Model):

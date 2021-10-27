@@ -1,8 +1,9 @@
 from aiogram.dispatcher import FSMContext
-from aiogram.utils.markdown import  bold,  code
 from aiogram.types import Message, CallbackQuery, ParseMode
-from ...loader import dp, bot
+from aiogram.utils.markdown import bold, code
+
 from ...keyboards.inline.brandSelect import brandButtons
+from ...loader import dp, bot
 from ...states.SearchParamsClass import SearchParams
 
 

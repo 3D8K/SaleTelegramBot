@@ -1,5 +1,6 @@
-from bot.keyboards.inline.callbacks import callbackDatas
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+from bot.keyboards.inline.callbacks import callbackDatas
 
 brandButtons = InlineKeyboardMarkup()
 Adidas = InlineKeyboardButton(text='Adidas', callback_data=callbackDatas.brandCallBack.new(brand="adidas"))

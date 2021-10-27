@@ -1,5 +1,6 @@
-from bot.keyboards.inline.callbacks import callbackDatas
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+from bot.keyboards.inline.callbacks import callbackDatas
 
 sizeButtons = InlineKeyboardMarkup()
 size365 = InlineKeyboardButton(text='36.5', callback_data=callbackDatas.sizeCallBack.new(size='36.5'))
