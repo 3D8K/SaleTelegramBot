@@ -1,13 +1,15 @@
 from aiogram.types import ParseMode
 from bot.loader import bot
 from aiogram.utils.markdown import bold
-
 from gui import emoji
 from shops.AsosClass import Asos
 from shops.LystClass import Lyst
 from shops.FarfetchClass import Farfetch
 from models.BrandModel import BrandModel
 from models.RequestModel import RequestModel
+LEN_ARRAY_PARAMS = 6
+MAX_PRICE_DEFAULT = 100000
+MIN_PRICE_DEFAULT = 0
 
 
 class RequestsControlelr(object):
@@ -29,12 +31,12 @@ class RequestsControlelr(object):
     async def checkArrayParams(cls, data: dict, telegaramTag: int):
         emptyKeys = ['err']
         if data.setdefault('priceLow') == None:
-            data['priceLow'] = 0
+            data['priceLow'] = MIN_PRICE_DEFAULT
         if data.setdefault('priceHigh') == None:
-            data['priceHigh'] = 99999999
+            data['priceHigh'] = MAX_PRICE_DEFAULT
         if data.setdefault('color') == None:
             data['color'] = 'any'
-        if len(data) < 6:
+        if len(data) < LEN_ARRAY_PARAMS:
             if 'gender' not in data:
                 emptyKeys.append('пол')
             if 'brand' not in data:
