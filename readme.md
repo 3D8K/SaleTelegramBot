@@ -17,7 +17,8 @@ __SneakerSaleManager__
 | 🔲 | Добавление айтемов в вишлист, а так же отслеживание их наличих в магахинах  | 
 | 🔲 | Добавить такие магазины как YOOX, END| 
 
-
+### Диограмма классов
+![Alt-текск](https://sun9-5.userapi.com/impg/HOr4ouAgqNwjoeJVVu6Of7foUCIwX42bzRU3TQ/XBgpodlKFXM.jpg?size=2560x1566&quality=96&sign=cb8aeb0b12b23894f128cb63739cc34f&type=album "Диограмма классов")
 ### Диограмма базы данных
 ![Alt-текст](https://sun9-9.userapi.com/impg/Xz1EPlcFr6zr_JfhAlwYTSjA0vpH6xfc_RhuQQ/nkVE57OR3AA.jpg?size=668x400&quality=96&sign=e3edce615bd0ecae98c56c508898bf38&type=album "Диограмма БД")
 =======
