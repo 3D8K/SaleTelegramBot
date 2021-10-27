@@ -33,6 +33,8 @@ async def getReqHistory(message: Message):
         await message.answer(text=f"Ваша истрия поиска пуста{emoji.SAD_EMOJI}")
     else:
         start = len(reqHistory) - 5
+        if (len(reqHistory) < 5):
+            start = 0
         for i in range(start, len(reqHistory)):
             req = reqHistory[i]
             brandName = BrandModel.getBrandName(req['brand_id'])
