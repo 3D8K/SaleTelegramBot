@@ -1,6 +1,6 @@
 import pymysql
 
-from configDB import *
+from .configDB import *
 
 
 class SingletonMeta(type):
@@ -31,7 +31,8 @@ class Database(metaclass=SingletonMeta):
         connection = Database.connectDb()
         try:
             with connection.cursor() as cursor:
-                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in columns)) + ") VALUES(" + ','.join((str(f"'{n}'") for n in values)) + ")"
+                Query = f"INSERT INTO `{tableName}` (" + ','.join((str(n) for n in columns)) + ") VALUES(" + ','.join(
+                    (str(f"'{n}'") for n in values)) + ")"
                 cursor.execute(Query)
                 connection.commit()
         finally:

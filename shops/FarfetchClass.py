@@ -17,7 +17,7 @@ class Farfetch(Shop):
         requestParams = {'view': 250, 'scale': 282, 'rootCategory': gender, 'pagetype': 'Shopping',
                          'pricetype': 'fullprice', 'c-category': 137174,
                          'c-designer': brand, 'size': sizes[float(size)], 'colour': colors[color],
-                         'price': str(priceLow) + '-' + str(priceHigh)}
+                         'price': str(int(priceLow)) + '-' + str(int(priceHigh))}
         uaTemp = UserAgent()
         randomUserAgent = uaTemp.random
         req = requests.get(url=url, params=requestParams, headers={"User-Agent": randomUserAgent})
